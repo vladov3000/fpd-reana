@@ -1,24 +1,25 @@
 version: 0.6.0
 inputs:
   files:
-    - code/gendata.C
-    - code/fitdata.C
+    - inputs/output.hepmc
+    - inputs/ma5_recast_card.dat
+    - inputs/ma5_run_card.dat
+    - inputs/param_tmpl_mChi_mPhi1.dat
+    - inputs/proc_card_mg5.dat
+    - inputs/run_card.dat
+    - inputs/DMSimpt_NLO_v1_2_UFO.ufo.tar
   parameters:
-    events: 20000
-    data: results/data.root
-    plot: results/plot.png
+    hepmc: output.hepmc
+    ma5_recast_card: ma5_recast_card.dat
+    ma5_run_card: ma5_run_card.dat
+    n_events: 10000
+    param_tmpl: param_card_mChi_mPhi.dat
+    proc_card: proc_card_mg5.dat
+    run_card: run_card.dat
+    ufotar: DMSimpt_NLO_v1_2_UFO.ufo.tar
 workflow:
-  type: serial
-  specification:
-    steps:
-      - name: gendata
-        environment: 'reanahub/reana-env-root6:6.18.04'
-        commands:
-        - mkdir -p results && root -b -q 'code/gendata.C(${events},"${data}")'
-      - name: fitdata
-        environment: 'reanahub/reana-env-root6:6.18.04'
-        commands:
-        - root -b -q 'code/fitdata.C("${data}","${plot}")'
+  type: yadage
+  file: ma5_scatter.yml
 outputs:
   files:
-    - results/plot.png
+    - madanalysis5/ANALYSIS
