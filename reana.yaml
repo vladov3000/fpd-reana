@@ -18,8 +18,8 @@ inputs:
     run_card: run_card.dat
     ufotar: DMSimpt_NLO_v1_2_UFO.ufo.tar
 workflow:
-  type: yadage
-  file: ma5_scatter.yml
+  type: 'yadage'
+  file: 'ma5_scatter.yaml'
 outputs:
   files:
     - madanalysis5/ANALYSIS
