@@ -1,0 +1,20 @@
+stages:
+  - name: echoflow
+    dependencies: ["init"]
+    scheduler:
+      scheduler_type: singlestep-stage
+      parameters:
+        param_card: {output: param_card, step: init}
+        outputfile: '{workdir}/output.txt'
+      step:
+        process:
+          process_type: 'string-interpolated-cmd'
+          cmd: 'cat {param_card} > {outputfile}'
+        publisher:
+          publisher_type: 'frompar-pub'
+          outputmap:
+            outfile: outputfile
+        environment:
+          environment_type: docker-encapsulated
+          image: recast/madgraph
+          imagetag: '2.6.7_v2'

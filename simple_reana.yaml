@@ -5,7 +5,7 @@ inputs:
   parameters: {$ref: /inputs/input.yml}
 workflow:
   type: 'yadage'
-  file: 'ma5_scatter.yaml'
+  file: 'simple_scatter.yaml'
 outputs:
   files:
-    - generation_madgraph_pythia_*/madanalysis5/ANALYSIS
+    - simple_scatter_*/echoflow/output.txt

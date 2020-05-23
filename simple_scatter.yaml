@@ -1,0 +1,12 @@
+stages:
+  - dependencies: ["init"]
+    name: simple_scatter
+    scheduler:
+      parameters:
+        param_card: {stages: init, output: param_cards, flatten: true}
+      scheduler_type: multistep-stage
+      scatter:
+        method: zip
+        parameters: ['param_card']
+      workflow:  { $ref: 'echoflow.yaml'}
+      
